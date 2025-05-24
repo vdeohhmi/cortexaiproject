@@ -2,168 +2,231 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cortex.ai High School AI Bootcamp</title>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+    rel="stylesheet"
+  />
   <style>
     :root {
       --primary: #4a00e0;
       --secondary: #8e2de2;
       --logo-green: #00ff00;
-      --nav-text: #ffffff;
       --nav-bg: #1f1f2e;
+      --nav-text: #fff;
       --ease: 0.3s ease;
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; background:#fff; color:#333; line-height:1.6; }
-    a { color:inherit; text-decoration:none; }
-    img { display:block; max-width:100%; height:auto; }
+
+    /* Globals */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    /* Container */
+    .container {
+      width: min(90%, 1200px);
+      margin: 0 auto;
+    }
 
     /* Header & Nav */
     header {
-      position: fixed; top:0; width:100%;
-      padding:1rem 2rem;
+      position: fixed; top: 0; left: 0; right: 0;
       background: var(--nav-bg);
+      padding: 1rem 0;
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      z-index:1000;
+      z-index: 1000;
       transition: background var(--ease);
     }
     header.scrolled { background: rgba(14,15,21,0.95); }
-    .nav-container {
-      max-width:1200px; margin:auto;
-      display:flex; align-items:center; justify-content:space-between;
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .logo-container { display:flex; align-items:center; }
-    .site-logo { width:56px; height:56px; }
-    .logo-text {
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img { width: 56px; height: 56px; }
+    .logo h1 {
+      margin-left: 0.5rem;
+      font-size: 1.8rem;
       color: var(--logo-green);
-      font-size:2rem; font-weight:800;
-      margin-left:0.5rem;
     }
-    nav { position:relative; }
+    nav { position: relative; }
     .nav-toggle {
-      display:none; background:none; border:none;
-      font-size:1.5rem; color:var(--nav-text);
-      cursor:pointer;
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      cursor: pointer;
     }
-    ul {
-      list-style:none;
-      display:flex; gap:1.5rem;
+    ul.nav-list {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
     }
-    li a {
-      font-weight:600; padding:0.6rem 1.2rem;
-      border-radius:999px;
-      transition: background var(--ease), color var(--ease), box-shadow var(--ease);
+    ul.nav-list li a {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: background var(--ease), box-shadow var(--ease);
     }
-    li a:hover, li a.active {
-      background: var(--primary); color:#fff;
-      box-shadow:0 4px 12px rgba(0,0,0,0.2);
-    }
-    @media (max-width: 768px) {
-      .nav-toggle { display:block; }
-      ul {
-        position:absolute; top:64px; right:1rem;
-        flex-direction:column; background:var(--nav-bg);
-        padding:1rem; border-radius:8px; display:none;
-      }
-      nav.open ul { display:flex; }
-      li a { margin:0.5rem 0; }
+    ul.nav-list li a:hover,
+    ul.nav-list li a.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* Hero */
+    /* Mobile nav */
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      ul.nav-list {
+        position: absolute;
+        top: 64px; right: 0;
+        flex-direction: column;
+        background: var(--nav-bg);
+        padding: 1rem;
+        border-radius: 8px;
+        display: none;
+      }
+      nav.open ul.nav-list { display: flex; }
+      ul.nav-list li + li { margin-top: 0.5rem; }
+    }
+
+    /* Hero banner */
     .hero {
-      padding-top:80px; /* offset header */
-      max-height:60vh;
-      overflow:hidden;
+      padding-top: 80px; /* space for fixed header */
+      overflow: hidden;
+      max-height: 400px;
     }
     .hero img {
-      width:100%;
-      height:auto;
-      object-fit:contain;
-      object-position:center center;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
       transition: transform 1s var(--ease);
     }
     .hero img:hover { transform: scale(1.02); }
 
     /* Sections */
-    section { padding:4rem 2rem; }
+    section {
+      padding: 4rem 0;
+    }
     .section-title {
-      font-size:2rem; text-align:center;
-      margin-bottom:2rem; color:var(--primary);
+      text-align: center;
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 2rem;
     }
 
     /* Grid cards */
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; }
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
     .card {
-      background:#f9f9f9; border-radius:8px;
-      padding:1.5rem; text-align:center;
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       transition: transform var(--ease), box-shadow var(--ease);
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
     }
     .card:hover {
-      transform:translateY(-5px);
-      box-shadow:0 6px 16px rgba(0,0,0,0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
     }
-    .card h3 { margin-bottom:0.5rem; color:var(--primary); }
+    .card h3 { color: var(--primary); margin-bottom: 0.5rem; }
 
-    /* CTA button */
-    .cta { text-align:center; margin:4rem 0; }
+    /* CTA */
+    .cta {
+      text-align: center;
+      margin: 4rem 0;
+    }
     .cta button {
-      padding:0.75rem 2rem; background:var(--secondary);
-      color:#fff; border:none; border-radius:4px;
-      font-size:1rem; cursor:pointer;
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
       transition: opacity var(--ease), box-shadow var(--ease);
     }
     .cta button:hover {
-      opacity:0.9;
-      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0.9;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     /* Form */
     form {
-      max-width:500px; margin:auto;
-      background:#fff; padding:2rem;
-      border-radius:8px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .form-group { margin-bottom:1rem; }
-    label { display:block; margin-bottom:0.5rem; font-weight:600; }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
     input, select {
-      width:100%; padding:0.75rem;
-      border:1px solid #ccc; border-radius:4px;
-      transition:border-color var(--ease), box-shadow var(--ease);
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color var(--ease), box-shadow var(--ease);
     }
     input:focus, select:focus {
-      outline:none; border-color: var(--primary);
-      box-shadow:0 0 0 3px rgba(74,0,224,0.15);
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(74,0,224,0.15);
     }
     button[type="submit"] {
-      width:100%; padding:0.75rem;
-      background:var(--primary); color:#fff;
-      border:none; border-radius:4px; font-weight:600;
-      cursor:pointer; transition:opacity var(--ease);
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--ease);
     }
-    button[type="submit"]:hover { opacity:0.9; }
+    button[type="submit"]:hover { opacity: 0.9; }
 
     /* Footer */
     footer {
-      text-align:center; padding:2rem;
-      background:#222; color:#aaa;
+      background: #222;
+      color: #aaa;
+      padding: 2rem 0;
+      text-align: center;
     }
-    footer a { color:var(--secondary); }
+    footer a { color: var(--secondary); }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header id="header">
-    <div class="nav-container">
-      <div class="logo-container">
-        <img src="logo.png" alt="Cortex.ai Logo" class="site-logo"/>
-        <div class="logo-text">Cortex.ai</div>
+    <div class="container nav-wrapper">
+      <div class="logo">
+        <img src="logo.png" alt="Cortex.ai Logo" />
+        <h1>Cortex.ai</h1>
       </div>
       <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
       <nav>
-        <ul>
+        <ul class="nav-list">
           <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#curriculum">Curriculum</a></li>
@@ -175,37 +238,150 @@
     </div>
   </header>
 
+  <!-- HERO -->
   <section id="hero" class="hero">
-    <img src="banner-landscape.png" alt="High school students transitioning to AI and college"/>
+    <img src="banner-landscape.png" alt="High school students transitioning to AI and college" />
   </section>
 
-  <!-- …the rest of your sections remain the same… -->
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Cortex.ai Bootcamp</h2>
+      <p>
+        Experience a 6-week immersive program designed for high school students to develop in-demand AI
+        skills through hands-on projects and expert-led sessions.
+      </p>
+    </div>
+  </section>
 
+  <!-- CURRICULUM -->
+  <section id="curriculum">
+    <div class="container">
+      <h2 class="section-title">Curriculum Highlights</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Python Basics</h3>
+          <p>Learn foundational programming concepts.</p>
+        </div>
+        <div class="card">
+          <h3>Data Analysis</h3>
+          <p>Manipulate and visualize data sets.</p>
+        </div>
+        <div class="card">
+          <h3>Machine Learning</h3>
+          <p>Understand supervised and unsupervised models.</p>
+        </div>
+        <div class="card">
+          <h3>Deep Learning</h3>
+          <p>Build neural networks for real-world tasks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTRUCTORS -->
+  <section id="instructors">
+    <div class="container">
+      <h2 class="section-title">Certified Educators</h2>
+      <p>
+        All sessions are led by certified high school instructors with real classroom experience.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Start?</h2>
+      <button onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
+        Register Now
+      </button>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section id="register">
+    <div class="container">
+      <h2 class="section-title">Register</h2>
+      <form id="registration-form">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="first_name" required />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="last_name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Contact Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+1234567890"
+            pattern="^\+?\d{10,15}$"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="school">High School</label>
+          <input type="text" id="school" name="school" required />
+        </div>
+        <div class="form-group">
+          <label for="grade">Grade</label>
+          <select id="grade" name="grade" required>
+            <option value="">Select</option>
+            <option>9</option><option>10</option><option>11</option><option>12</option>
+          </select>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <p>
+        Email: <a href="mailto:info@cortex.ai">info@cortex.ai</a> |
+        Phone: <a href="tel:+1234567890">+1 (234) 567-890</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Cortex.ai. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2025 Cortex.ai. All rights reserved.</p>
+    </div>
   </footer>
 
+  <!-- SCRIPTS -->
   <script>
-    // Mobile nav toggle
-    document.querySelector('.nav-toggle')
-      .addEventListener('click', () => document.querySelector('nav').classList.toggle('open'));
-
-    // Header scroll background
-    window.addEventListener('scroll', () =>
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50)
-    );
-
-    // Form submit handler
-    document.getElementById('registration-form')
-      .addEventListener('submit', e => {
-        e.preventDefault();
-        fetch('https://script.google.com/macros/s/…/exec', {
-          method:'POST', body:new FormData(e.target)
-        })
-        .then(_ => alert('Registration successful!'))
-        .catch(_ => alert('Error submitting form.'));
-        e.target.reset();
-      });
+    // toggle mobile nav
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('nav').classList.toggle('open');
+    });
+    // header background on scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+    });
+    // registration form submit
+    document.getElementById('registration-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      fetch('https://script.google.com/macros/s/…/exec', {
+        method: 'POST',
+        body: new FormData(e.target)
+      })
+        .then(() => alert('Registration successful!'))
+        .catch(() => alert('Error submitting form.'));
+      e.target.reset();
+    });
   </script>
 </body>
 </html>
