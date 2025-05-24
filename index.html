@@ -6,6 +6,8 @@
   <title>Cortex.ai High School AI Bootcamp</title>
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     :root {
       --primary-color: #4a00e0;
@@ -20,70 +22,49 @@
     body { font-family: 'Inter', sans-serif; color: var(--text-color); background: #fff; scroll-behavior: smooth; }
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
-
-    /* Navigation */
-    header { background: var(--bg-dark); padding: 1rem 2rem; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    header { background: var(--bg-dark); padding: 1rem 2rem; position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
     .nav-container { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; }
     .site-logo { width: 50px; margin-right: 1rem; }
     .logo-text { font-size: 1.75rem; font-weight: 800; background: var(--accent); -webkit-background-clip: text; color: transparent; display: flex; align-items: center; }
     nav ul { display: flex; gap: 1.5rem; }
     nav li { list-style: none; }
-    nav a { font-weight: 600; color: #f0f0f0; transition: color var(--transition); }
-    nav a:hover { color: var(--primary-color); }
-
-    /* Hero Section */
-    .hero { position: relative; height: 70vh; overflow: hidden; }
+    nav a { position: relative; font-weight: 600; color: #f0f0f0; padding: 0.5rem; transition: color var(--transition); }
+    nav a.active, nav a:hover { color: var(--primary-color); }
+    /* Underline effect */
+    nav a.active::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--primary-color); border-radius: 2px; }
+    .hero { position: relative; height: 70vh; margin-top: 80px; overflow: hidden; }
     .hero img { object-fit: cover; width: 100%; height: 100%; filter: brightness(0.5); }
-    .hero::after {
-      content: '';
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(26, 26, 46, 0.6);
-    }
-    .hero .text {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      text-align: center; color: #fff; max-width: 90%; z-index: 1;
-    }
-    .hero h1 { font-size: 3.75rem; margin-bottom: 0.75rem; font-weight: 800; line-height: 1.1; }
+    .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 26, 46, 0.6); }
+    .hero .text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; max-width: 90%; z-index: 1; }
+    .hero h1 { font-size: 3.75rem; margin-bottom: 0.75rem; font-weight: 800; line-height: 1.1; overflow: hidden; white-space: nowrap; }
     .hero p { font-size: 1.25rem; margin-bottom: 1.5rem; }
-    .hero .btn {
-      display: inline-block; padding: 0.75rem 1.75rem;
-      background: var(--accent); color: #fff; border-radius: 50px; font-weight: 600;
-      transition: opacity var(--transition), transform var(--transition);
-    }
+    .hero .btn { display: inline-block; padding: 0.75rem 1.75rem; background: var(--accent); color: #fff; border-radius: 50px; font-weight: 600; transition: opacity var(--transition), transform var(--transition); }
     .hero .btn:hover { opacity: 0.9; transform: translateY(-2px); }
-
-    /* Section Styling */
-    section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+    section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    section.visible { opacity: 1; transform: translateY(0); }
     .section-title { text-align: center; font-size: 2.25rem; margin-bottom: 2rem; background: var(--accent); -webkit-background-clip: text; color: transparent; }
-
-    /* Curriculum Grid */
     .grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
     .card { background: var(--bg-light); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); transition: transform var(--transition), box-shadow var(--transition); }
     .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
     .card h3 { margin-bottom: 1rem; color: var(--primary-color); }
     .card p { line-height: 1.5; }
-
-    /* CTA Section */
-    .cta { background: var(--bg-dark); color: #fff; text-align: center; padding: 4rem 2rem; border-radius: 12px; margin: 4rem 0; }
+    .cta { background: var(--bg-dark); color: #fff; text-align: center; padding: 4rem 2rem; border-radius: 12px; margin: 4rem 0; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .cta.visible { opacity: 1; transform: translateY(0); }
     .cta h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
     .cta .btn { padding: 0.75rem 2rem; border-radius: 50px; }
-
-    /* Form Styling */
-    form { background: var(--bg-light); padding: 2.5rem; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; }
+    form { background: var(--bg-light); padding: 2.5rem; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    form.visible { opacity: 1; transform: translateY(0); }
     .form-group { margin-bottom: 1.5rem; }
     label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
     input, select { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px; transition: border-color var(--transition); }
     input:focus, select:focus { border-color: var(--primary-color); outline: none; }
     button { background: var(--primary-color); color: #fff; border: none; padding: 0.75rem 1.75rem; border-radius: 50px; font-size: 1rem; cursor: pointer; transition: opacity var(--transition), transform var(--transition); }
     button:hover { opacity: 0.9; transform: translateY(-2px); }
-
-    /* Footer */
     footer { background: var(--bg-dark); color: #ccc; text-align: center; padding: 2rem; margin-top: 4rem; }
     footer a { color: #fff; font-weight: 600; }
   </style>
 </head>
 <body>
-  <!-- Header & Navigation -->
   <header>
     <div class="nav-container">
       <div style="display:flex; align-items:center;">
@@ -102,24 +83,18 @@
       </nav>
     </div>
   </header>
-
-  <!-- Hero Banner -->
   <section id="hero" class="hero">
     <img src="banner-landscape.jpg" alt="High school students transitioning to AI and college" width="1920" height="600" loading="lazy">
     <div class="text">
-      <h1>Learning AI Today For a Brighter Tomorrow</h1>
+      <h1 id="hero-title">Learning AI Today For a Brighter Tomorrow</h1>
       <p>Hands-on AI projects guided by certified high school instructors</p>
       <a href="#register" class="btn">Join the Bootcamp</a>
     </div>
   </section>
-
-  <!-- About -->
   <section id="about">
     <h2 class="section-title">About Cortex.ai Bootcamp</h2>
     <p>Experience an immersive 6-week online program crafted for ambitious high school students. Build real-world AI skills—Python, machine learning, and deep learning—through project-based learning, community collaboration, and expert mentorship.</p>
   </section>
-
-  <!-- Curriculum -->
   <section id="curriculum">
     <h2 class="section-title">What You'll Learn</h2>
     <div class="grid">
@@ -130,23 +105,17 @@
       <div class="card"><h3>Capstone Showcase</h3><p>Collaborate on a real-world AI project and present to peers.</p></div>
     </div>
   </section>
-
-  <!-- Instructors -->
   <section id="instructors">
     <h2 class="section-title">Learn from Certified Educators</h2>
     <p style="text-align:center; max-width:800px; margin:0 auto; font-size:1.1rem;">All sessions are led by certified high school instructors with real classroom experience, ensuring lessons are engaging, relatable, and aligned with your academic goals.</p>
   </section>
-
-  <!-- CTA -->
   <section class="cta">
     <h2>Ready to Launch Your AI Journey?</h2>
     <a href="#register" class="btn">Secure Your Spot</a>
   </section>
-
-  <!-- Registration Form -->
   <section id="register">
     <h2 class="section-title">Register Now</h2>
-    <form action="#" method="post">
+    <form>
       <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" name="first_name" placeholder="Your first name" required></div>
       <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" name="last_name" placeholder="Your last name" required></div>
       <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="you@example.com" required></div>
@@ -155,17 +124,55 @@
       <button type="submit">Submit</button>
     </form>
   </section>
-
-  <!-- Contact -->
   <section id="contact">
     <h2 class="section-title">Get in Touch</h2>
     <p style="text-align:center;">Have questions? Reach out at <a href="mailto:info@cortex.ai">info@cortex.ai</a>.</p>
   </section>
-
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Cortex.ai. All rights reserved.</p>
     <p><a href="#hero">Back to Top</a></p>
   </footer>
+  <!-- jQuery Interactions -->
+  <script>
+    $(document).ready(function(){
+      // Typewriter effect for hero title
+      const text = $('#hero-title').text();
+      $('#hero-title').text('');
+      let idx = 0;
+      function typeWriter(){
+        if(idx < text.length){
+          $('#hero-title').append(text.charAt(idx));
+          idx++;
+          setTimeout(typeWriter, 100);
+        }
+      }
+      typeWriter();
+      // Smooth scroll
+      $('nav a').on('click', function(e){
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top - 70 }, 600);
+      });
+      // Highlight nav on scroll & reveal sections
+      const sections = $('section');
+      const navLinks = $('nav a');
+      $(window).on('scroll', function(){
+        const scrollPos = $(this).scrollTop() + 80;
+        sections.each(function(){
+          const top = $(this).offset().top;
+          const bottom = top + $(this).outerHeight();
+          if(scrollPos >= top && scrollPos < bottom){
+            navLinks.removeClass('active');
+            $('nav a[href="#'+$(this).attr('id')+'"]').addClass('active');
+          }
+          if(scrollPos + $(window).height() > top + 100){
+            $(this).addClass('visible');
+          }
+        });
+        // CTA and form
+        if(scrollPos + $(window).height() > $('.cta').offset().top + 100) $('.cta').addClass('visible');
+        if(scrollPos + $(window).height() > $('#register').offset().top + 100) $('form').addClass('visible');
+      });
+    });
+  </script>
 </body>
 </html>
