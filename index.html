@@ -27,7 +27,7 @@ header {
   top: 0;
   width: 100%;
   padding: 1rem 2rem;
-  background: #12131A;
+  background: var(--nav-bg);
   box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   z-index: 1000;
   transition: background var(--ease);
@@ -47,20 +47,18 @@ header.scrolled {
   align-items: center;
 }
 .site-logo {
-  width: 56px;
-  height: 56px;
-  background: #fff;
+  width: 64px;
+  height: 64px;
+  background: var(--nav-bg);
   border-radius: 50%;
-  padding: 4px;
-  border: 3px solid var(--logo-green);
-  box-shadow: 0 0 8px rgba(0,255,0,0.5);
+  padding: 8px;
+  filter: drop-shadow(0 0 8px var(--logo-green));
 }
 .logo-text {
   color: var(--logo-green);
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 800;
   margin-left: 0.5rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 nav {
   position: relative;
@@ -81,10 +79,9 @@ ul {
 li a {
   color: var(--nav-text);
   font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  background: transparent;
   transition: background var(--ease), color var(--ease);
 }
 li a:hover {
@@ -95,7 +92,6 @@ li a.active {
   background: var(--primary);
   color: #fff;
 }
-
 /* Mobile Nav */
     @media(max-width:768px) {
       .nav-toggle { display:block; }
