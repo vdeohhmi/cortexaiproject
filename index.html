@@ -10,73 +10,147 @@
     :root {
       --primary-color: #4a00e0;
       --secondary-color: #8e2de2;
-      --text-light: #f0f0f0;
-      --bg-dark: #1f1f2e;
-      --bg-light: #f5f5f5;
-      --transition: 0.3s ease;
+      --light-text: #f0f0f0;
+      --dark-bg: #1f1f2e;
+      --light-bg: #f5f5f5;
+      --transition: 0.4s ease;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; color: #333; background: #fff; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: #333; background: #fff; line-height: 1.6; }
     a { text-decoration: none; color: inherit; }
-    img { display: block; width: 100%; height: auto; }
 
-    /* Header */
-    header { background: var(--bg-dark); padding: 1rem 2rem; position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-    .site-logo { width: 50px; margin-right: 1rem; }
-    .logo-text { font-size: 1.75rem; font-weight: 800; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; color: transparent; }
+    /* Navigation */
+    header {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(31,31,46,0.8); backdrop-filter: blur(10px);
+      transition: background var(--transition);
+    }
+    header.scrolled { background: var(--dark-bg); }
+    .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; }
+    .site-logo { width: 40px; }
+    .logo-text {
+      font-size: 1.75rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text; color: transparent;
+      margin-left: 0.5rem;
+    }
     nav ul { display: flex; gap: 1.5rem; }
-    nav a { position: relative; padding: 0.5rem; font-weight: 600; color: var(--text-light); transition: color var(--transition); }
-    nav a:hover, nav a.active { color: var(--primary-color); }
-    nav a.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary-color); border-radius: 2px; }
+    nav a {
+      font-weight: 600; color: var(--light-text); padding: 0.5rem;
+      position: relative; transition: color var(--transition);
+    }
+    nav a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0%; height: 2px;
+      background: var(--primary-color); transition: width var(--transition);
+    }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+    nav a:hover { color: var(--primary-color); }
 
-    /* Hero Banner */
-    .hero { margin-top: 80px; }
-    .hero img { object-fit: cover; }
-    .hero .btn { display: block; max-width: 220px; margin: -60px auto 0; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: #fff; padding: 0.75rem 1.5rem; border: none; border-radius: 50px; font-size: 1.1rem; text-align: center; transition: opacity var(--transition), transform var(--transition); }
-    .hero .btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    /* Hero with Parallax */
+    .hero {
+      margin-top: 80px; height: 450px; overflow: hidden; position: relative;
+    }
+    .hero img {
+      width: 100%; height: 100%; object-fit: cover;
+      transform: scale(1.1);
+      transition: transform 20s ease-out;
+    }
+    .hero:hover img { transform: scale(1);
+    }
+    .hero .overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #fff; text-align: center; padding: 0 1rem;
+    }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .hero .btn {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: #fff; padding: 0.75rem 1.5rem; border: none; border-radius: 30px;
+      font-size: 1rem; font-weight: 600; transition: opacity var(--transition);
+    }
+    .hero .btn:hover { opacity: 0.9; }
 
-    /* Sections */
-    section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
-    .section-title { text-align: center; font-size: 2.25rem; margin-bottom: 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; color: transparent; }
+    /* Section Base */
+    section { padding: 4rem 2rem; max-width: 1000px; margin: auto; }
+    .section-title {
+      text-align: center; font-size: 2rem; margin-bottom: 2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text; color: transparent;
+    }
 
-    /* Curriculum Cards */
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-    .card { background: var(--bg-light); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); transition: transform var(--transition), box-shadow var(--transition); }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
-    .card h3 { margin-bottom: 1rem; color: var(--primary-color); }
-    .card p { line-height: 1.5; }
+    /* Cards */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1.5rem; }
+    .card {
+      background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden; position: relative; transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .card h3 { margin: 1rem; color: var(--dark-bg); }
+    .card p { margin: 0 1rem 1rem; font-size: 0.95rem; color: #555; }
 
-    /* CTA Banner */
-    .cta { background: var(--bg-dark); color: #fff; text-align: center; padding: 3rem 2rem; border-radius: 12px; margin: 4rem 0; }
-    .cta .btn { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: #fff; padding: 0.75rem 1.75rem; border: none; border-radius: 50px; font-size: 1rem; transition: opacity var(--transition), transform var(--transition); }
-    .cta .btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    /* CTA Strip */
+    .cta {
+      background: var(--bg-light); border-radius: 12px; text-align: center;
+      padding: 3rem 2rem; margin: 4rem 0;
+      background-image: linear-gradient(135deg, rgba(74,0,224,0.1), rgba(142,45,226,0.1));
+    }
+    .cta h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+    .cta .btn { background: var(--secondary-color); color: #fff; padding: 0.75rem 1.75rem; border: none; border-radius: 30px; font-size: 1rem; transition: background var(--transition);
+    }
+    .cta .btn:hover { background: var(--primary-color); }
 
     /* Form */
-    form { background: var(--bg-light); padding: 2.5rem; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; }
-    .form-group { margin-bottom: 1.5rem; }
-    label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-    input, select { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px; }
+    form {
+      background: var(--bg-light); padding: 2rem; border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 500px; margin: auto;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+    input, select {
+      width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px;
+      transition: border-color var(--transition);
+    }
     input:focus, select:focus { border-color: var(--primary-color); outline: none; }
-    button[type="submit"] { background: var(--primary-color); color: #fff; border: none; padding: 0.75rem 1.75rem; border-radius: 50px; font-size: 1rem; cursor: pointer; transition: opacity var(--transition), transform var(--transition); }
-    button[type="submit"]:hover { opacity: 0.9; transform: translateY(-2px); }
+    button[type="submit"] {
+      display: block; width: 100%; background: var(--primary-color);
+      color: #fff; padding: 0.75rem; border: none; border-radius: 30px;
+      font-size: 1rem; font-weight: 600;
+    }
 
     /* Footer */
-    footer { background: var(--bg-dark); color: #ccc; text-align: center; padding: 2rem; margin-top: 4rem; }
-    footer a { color: #fff; font-weight: 600; }
+    footer {
+      background: var(--dark-bg); color: #ccc; text-align: center;
+      padding: 2rem 1rem; font-size: 0.9rem;
+    }
+    footer a:hover { color: var(--primary-color); }
+
+    @media(max-width:768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header id="header">
     <div class="nav-container">
-      <div style="display:flex;align-items:center;">
+      <div style="display:flex; align-items:center;">
         <img src="logo.png" alt="Cortex.ai Logo" class="site-logo">
         <div class="logo-text">Cortex.ai</div>
       </div>
       <nav>
         <ul>
-          <li><a href="#hero">Home</a></li>
+          <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#curriculum">Curriculum</a></li>
           <li><a href="#instructors">Instructors</a></li>
@@ -87,65 +161,81 @@
     </div>
   </header>
 
-  <!-- Hero Banner -->
+  <!-- Hero Section -->
   <section id="hero" class="hero">
-    <img src="banner-landscape.png" alt="Learn AI Today For Brighter Tomorrow" width="1920" height="600" loading="lazy">
-    <button class="btn hero-btn" onclick="location.href='#register'">Join the Bootcamp</button>
-  </section>
-
-  <!-- About -->
-  <section id="about">
-    <h2 class="section-title">About Cortex.ai Bootcamp</h2>
-    <p>Experience an immersive 6-week online program crafted for ambitious high school students. Build real-world AI skills—Python, machine learning, and deep learning—through project-based learning, community collaboration, and expert mentorship.</p>
-  </section>
-
-  <!-- Curriculum -->
-  <section id="curriculum">
-    <h2 class="section-title">What You'll Learn</h2>
-    <div class="grid">
-      <div class="card"><h3>Python & Data Fundamentals</h3><p>Master coding basics and data handling to prepare for AI workflows.</p></div>
-      <div class="card"><h3>Machine Learning Foundations</h3><p>Implement algorithms, evaluate models, and understand feature engineering.</p></div>
-      <div class="card"><h3>Neural Network Basics</h3><p>Design and train simple neural networks for classification tasks.</p></div>
-      <div class="card"><h3>Deep Learning Applications</h3><p>Work with CNNs and RNNs for image and text data projects.</p></div>
-      <div class="card"><h3>Capstone Showcase</h3><p>Collaborate on a real-world AI project and present to peers.</p></div>
+    <img src="banner-landscape.png" alt="Learn AI Today For Brighter Tomorrow">
+    <div class="overlay">
+      <h1>Learn AI Today For Brighter Tomorrow</h1>
+      <p>Hands-on AI projects guided by certified high school instructors.</p>
+      <button class="btn" onclick="location.href='#register'">Join the Bootcamp</button>
     </div>
   </section>
 
-  <!-- Instructors -->
+  <!-- About Section -->
+  <section id="about">
+    <h2 class="section-title">About Cortex.ai Bootcamp</h2>
+    <p>Experience a 6-week immersive program designed for high school students to develop in-demand AI skills through hands-on projects and expert-led sessions.</p>
+  </section>
+
+  <!-- Curriculum Section -->
+  <section id="curriculum">
+    <h2 class="section-title">Curriculum Highlights</h2>
+    <div class="grid">
+      <div class="card"><h3>Python Basics</h3><p>Learn foundational programming concepts.</p></div>
+      <div class="card"><h3>Data Analysis</h3><p>Manipulate and visualize data sets.</p></div>
+      <div class="card"><h3>Machine Learning</h3><p>Understand supervised and unsupervised models.</p></div>
+      <div class="card"><h3>Deep Learning</h3><p>Build neural networks for real-world tasks.</p></div>
+    </div>
+  </section>
+
+  <!-- Instructors Section -->
   <section id="instructors">
-    <h2 class="section-title">Learn from Certified Educators</h2>
-    <p style="text-align:center;max-width:800px;margin:0 auto;font-size:1.1rem;">All sessions are led by certified high school instructors with real classroom experience, ensuring lessons are engaging, relatable, and aligned with your academic goals.</p>
+    <h2 class="section-title">Certified Educators</h2>
+    <p style="text-align:center; max-width:800px; margin:auto;">All sessions are led by certified high school instructors with real classroom experience.</p>
   </section>
 
-  <!-- CTA -->
+  <!-- CTA Section -->
   <section class="cta">
-    <h2>Ready to Launch Your AI Journey?</h2>
-    <button class="btn" onclick="location.href='#register'">Secure Your Spot</button>
+    <h2>Ready to Start?</h2>
+    <button class="btn" onclick="location.href='#register'">Register Now</button>
   </section>
 
-  <!-- Register Form -->
+  <!-- Register Section -->
   <section id="register">
-    <h2 class="section-title">Register Now</h2>
+    <h2 class="section-title">Register</h2>
     <form>
-      <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" name="first_name" placeholder="Your first name" required></div>
-      <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" name="last_name" placeholder="Your last name" required></div>
-      <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="you@example.com" required></div>
-      <div class="form-group"><label for="school">High School</label><input type="text" id="school" name="school" placeholder="Name of your high school" required></div>
-      <div class="form-group"><label for="grade">Current Grade</label><select id="grade" name="grade" required><option value="">Select your grade</option><option value="9">9th Grade</option><option value="10">10th Grade</option><option value="11">11th Grade</option><option value="12">12th Grade</option></select></div>
+      <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" name="first_name" required></div>
+      <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" name="last_name" required></div>
+      <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required></div>
+      <div class="form-group"><label for="school">High School</label><input type="text" id="school" name="school" required></div>
+      <div class="form-group"><label for="grade">Grade</label><select id="grade" name="grade" required><option value="">Select</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
       <button type="submit">Submit</button>
     </form>
   </section>
 
-  <!-- Contact -->
+  <!-- Contact Section -->
   <section id="contact">
-    <h2 class="section-title">Get in Touch</h2>
-    <p style="text-align:center;max-width:800px;margin:0 auto;font-size:1.1rem;">Have questions? Reach out at <a href="mailto:info@cortex.ai">info@cortex.ai</a>.</p>
+    <h2 class="section-title">Contact Us</h2>
+    <p style="text-align:center; max-width:800px; margin:auto;">Questions? Email <a href="mailto:info@cortex.ai">info@cortex.ai</a>.</p>
   </section>
 
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Cortex.ai. All rights reserved.</p>
-    <p><a href="#hero">Back to Top</a></p>
   </footer>
+
+  <script>
+    // Change header background on scroll
+    window.addEventListener('scroll', function() {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+    });
+    // Smooth scroll for all links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
 </body>
 </html>
