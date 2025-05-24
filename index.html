@@ -18,7 +18,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: #fff; color: #333; }
     a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; height: auto; }
+    img { display: block; width: 100%; height: auto; }
 
     /* Header & Nav */
     header {
@@ -34,7 +34,7 @@
     header.scrolled { background: #0E0F15; }
     .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
     .logo-container { display: flex; align-items: center; }
-    .site-logo { width: 80px; height: 80px; }
+    .site-logo { width: 64px; height: 64px; }
     .logo-text { color: var(--logo-green); font-size: 2.2rem; font-weight: 800; margin-left: 0.5rem; }
     nav { position: relative; }
     .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--nav-text); cursor: pointer; }
@@ -44,7 +44,6 @@
       font-weight: 600;
       padding: 0.75rem 1.5rem;
       border-radius: 999px;
-      background: transparent;
       transition: background var(--ease), color var(--ease);
     }
     li a:hover, li a.active { background: var(--primary); color: #fff; }
@@ -57,53 +56,9 @@
 
     /* Hero */
     .hero {
-      padding-top: 80px; /* space for fixed header */
-      position: relative;
+      padding-top: 80px; /* offset header */
     }
-    .hero img {
-      width: 100%;
-      height: auto; /* show full image */
-      object-fit: fill;
-      display: block;
-    }
-    .hero .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: rgba(0,0,0,0.15); /* subtle shade */
-      padding: 0 1rem;
-    }
-    .hero h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-    }
-    .hero p {
-      font-size: 1rem;
-      color: #fff;
-      margin: 0.5rem 0 1rem;
-    }
-    .hero .btn {
-      background: var(--primary);
-      color: #fff;
-      padding: 0.5rem 1.5rem;
-      border: none;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 1.5rem; }
-      .hero p { font-size: 0.9rem; }
-    }
+    /* Banner image only, no overlay */
 
     /* Sections */
     section { padding: 4rem 2rem; }
@@ -148,13 +103,8 @@
   </header>
 
   <section id="hero" class="hero">
-    <!-- Use a clean banner image without baked-in text -->
-    <img src="A_flat-style_digital_illustration_depicts_three_hi.png" alt="High school students transitioning to AI and college">
-    <div class="overlay">
-      <h1>Learn AI Today For Brighter Tomorrow</h1>
-      <p>Hands-on AI projects guided by certified high school instructors.</p>
-      <button class="btn" onclick="document.getElementById('registration-form').scrollIntoView({behavior:'smooth'})">Join the Bootcamp</button>
-    </div>
+    <!-- Full-width banner image with baked-in text -->
+    <img src="complete-banner.png" alt="Learn AI Today For Brighter Tomorrow">
   </section>
 
   <section id="about">
@@ -179,7 +129,7 @@
 
   <section class="cta">
     <h2>Ready to Start?</h2>
-    <button class="btn" onclick="document.getElementById('registration-form').scrollIntoView({behavior:'smooth'})">Register Now</button>
+    <button class="btn" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Now</button>
   </section>
 
   <section id="register">
