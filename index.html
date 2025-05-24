@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortex.ai High School AI Bootcamp</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4a00e0;
+      --secondary-color: #8e2de2;
+      --text-color: #333;
+      --bg-light: #f5f5f5;
+      --bg-dark: #1f1f2e;
+      --accent: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text-color); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* Navigation */
+    header { background: var(--bg-dark); padding: 1rem 2rem; position: sticky; top: 0; z-index: 10; }
+    .nav-container { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; }
+    .logo { font-size: 1.5rem; font-weight: 800; background: var(--accent); -webkit-background-clip: text; color: transparent; }
+    nav ul { display: flex; gap: 1.5rem; }
+    nav li { list-style: none; }
+    nav a { font-weight: 600; color: #f0f0f0; transition: color 0.2s; }
+    nav a:hover { color: var(--primary-color); }
+
+    /* Hero Section */
+    .hero { position: relative; height: 70vh; overflow: hidden; }
+    .hero img { object-fit: cover; width: 100%; height: 100%; filter: brightness(0.6); }
+    .hero .text {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      text-align: center; color: #fff; max-width: 90%;
+    }
+    .hero h1 { font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 800; }
+    .hero p { font-size: 1.25rem; }
+    .hero .btn {
+      display: inline-block; margin-top: 1rem; padding: 0.75rem 1.5rem;
+      background: var(--accent); color: #fff; border-radius: 4px; font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .hero .btn:hover { opacity: 0.9; }
+
+    /* Section Styling */
+    section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-title { text-align: center; font-size: 2rem; margin-bottom: 2rem; background: var(--accent); -webkit-background-clip: text; color: transparent; }
+
+    /* Curriculum Grid */
+    .grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card { background: var(--bg-light); padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .card h3 { margin-bottom: 0.75rem; color: var(--primary-color); }
+
+    /* CTA Section */
+    .cta { background: var(--bg-dark); color: #fff; text-align: center; padding: 3rem 2rem; border-radius: 8px; }
+    .cta h2 { font-size: 2rem; margin-bottom: 1rem; }
+    .cta .btn { padding: 0.75rem 1.5rem; }
+
+    /* Form Styling */
+    form { background: var(--bg-light); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); max-width: 600px; margin: 0 auto; }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+    input, select { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: var(--primary-color); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; font-size: 1rem; cursor: pointer; transition: opacity 0.2s; }
+    button:hover { opacity: 0.9; }
+
+    /* Footer */
+    footer { background: var(--bg-dark); color: #ccc; text-align: center; padding: 2rem; margin-top: 4rem; }
+    footer a { color: #fff; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">Cortex.ai</div>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#curriculum">Curriculum</a></li>
+          <li><a href="#instructors">Instructors</a></li>
+          <li><a href="#register">Register</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section id="hero" class="hero">
+    <img src="banner-landscape.jpg" alt="High school students transitioning to AI and college">
+    <div class="text">
+      <h1>Bridge High School to College AI Excellence</h1>
+      <p>Hands-on AI projects guided by certified high school instructors</p>
+      <a href="#register" class="btn">Join the Bootcamp</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2 class="section-title">About Cortex.ai Bootcamp</h2>
+    <p>Experience an immersive 6-week online program crafted for ambitious high school students. Build real-world AI skills—Python, machine learning, and deep learning—through project-based learning, community collaboration, and expert mentorship.</p>
+  </section>
+
+  <!-- Curriculum -->
+  <section id="curriculum">
+    <h2 class="section-title">What You'll Learn</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Python & Data Fundamentals</h3>
+        <p>Master coding basics and data handling to prepare for AI workflows.</p>
+      </div>
+      <div class="card">
+        <h3>Machine Learning Foundations</h3>
+        <p>Implement algorithms, evaluate models, and understand feature engineering.</p>
+      </div>
+      <div class="card">
+        <h3>Neural Network Basics</h3>
+        <p>Design and train simple neural networks for classification tasks.</p>
+      </div>
+      <div class="card">
+        <h3>Deep Learning Applications</h3>
+        <p>Work with CNNs and RNNs for image and text data projects.</p>
+      </div>
+      <div class="card">
+        <h3>Capstone Showcase</h3>
+        <p>Collaborate on a real-world AI project and present to peers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instructors -->
+  <section id="instructors">
+    <h2 class="section-title">Learn from Certified Educators</h2>
+    <p style="text-align:center; max-width:800px; margin:0 auto; font-size:1.1rem;">All sessions are led by certified high school instructors with real classroom experience, ensuring lessons are engaging, relatable, and aligned with your academic goals.</p>
+  </section>
+
+  <!-- Registration Form -->
+  <section id="register">
+    <h2 class="section-title">Register Now</h2>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="first_name" placeholder="Your first name" required>
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="last_name" placeholder="Your last name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group">
+        <label for="school">High School</label>
+        <input type="text" id="school" name="school" placeholder="Name of your high school" required>
+      </div>
+      <div class="form-group">
+        <label for="grade">Current Grade</label>
+        <select id="grade" name="grade" required>
+          <option value="">Select your grade</option>
+          <option value="9">9th Grade</option>
+          <option value="10">10th Grade</option>
+          <option value="11">11th Grade</option>
+          <option value="12">12th Grade</option>
+        </select>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2 class="section-title">Get in Touch</n12>
+    <p style="text-align:center;">Have questions? Reach out at <a href="mailto:info@cortex.ai">info@cortex.ai</a>.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Cortex.ai. All rights reserved.</p>
+    <p><a href="#hero">Back to Top</a></p>
+  </footer>
+</body>
+</html>
