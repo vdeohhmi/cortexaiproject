@@ -10,6 +10,7 @@
     :root {
       --primary-color: #4a00e0;
       --secondary-color: #8e2de2;
+      --logo-color: #00FF00; /* updated to match provided green */
       --light-text: #f0f0f0;
       --dark-bg: #1f1f2e;
       --light-bg: #f5f5f5;
@@ -25,7 +26,12 @@
     header.scrolled { background:var(--dark-bg); }
     .nav-container { max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; }
     .site-logo { width:40px; }
-    .logo-text { color:#fff; font-size:2rem; font-weight:800; text-shadow:0 2px 4px rgba(0,0,0,0.5); margin-left:0.5rem; }
+    .logo-text {
+      color: var(--logo-color);
+      font-size:2rem;
+      font-weight:800;
+      margin-left:0.5rem;
+    }
     nav ul { display:flex; gap:1.5rem; }
     nav a { font-weight:600; color:var(--light-text); padding:0.5rem; transition:color var(--transition); }
     nav a:hover, nav a.active { color:var(--primary-color); }
