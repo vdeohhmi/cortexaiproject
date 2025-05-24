@@ -47,11 +47,10 @@ header.scrolled {
   align-items: center;
 }
 .site-logo {
-  width: 64px;
-  height: 64px;
-  background: var(--nav-bg);
-  border-radius: 50%;
-  padding: 8px;
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  background: transparent;
   filter: drop-shadow(0 0 8px var(--logo-green));
 }
 .logo-text {
@@ -147,7 +146,19 @@ li a.active {
       .hero h1 { font-size:2.5rem; }
       .hero p { font-size:1rem; }
     }
-  </style>
+    /* Override for larger logo and better banner readability */
+  .site-logo {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .hero .overlay {
+    background: rgba(0, 0, 0, 0.7) !important;
+  }
+  .hero .overlay h1,
+  .hero .overlay p {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+  }
+</style>
 </head>
 <body>
   <header id="header">
