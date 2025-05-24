@@ -58,36 +58,36 @@
     /* Hero */
     .hero {
       margin-top: 80px; /* space for fixed header */
-      height: 40vh; /* reduced height */
-      min-height: 240px;
       position: relative;
-      overflow: hidden;
     }
     .hero img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto; /* full image visible */
+      object-fit: contain;
       display: block;
     }
-    /* removed gray overlay */
     .hero .overlay {
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
+      background: rgba(0,0,0,0.15); /* subtle shade */
       padding: 0 1rem;
     }
     .hero h1 {
-      font-size: 2rem; /* reduced font size */
+      font-size: 2rem;
       font-weight: 800;
       color: #fff;
       line-height: 1.2;
     }
     .hero p {
-      font-size: 1rem; /* reduced font size */
+      font-size: 1rem;
       color: #fff;
       margin: 0.5rem 0 1rem;
     }
@@ -100,15 +100,9 @@
       font-size: 0.9rem;
       font-weight: 600;
     }
-
     @media (max-width: 768px) {
       .hero h1 { font-size: 1.5rem; }
       .hero p { font-size: 0.9rem; }
-    }
-
-    /* Sections */ (max-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
-      .hero p { font-size: 1rem; }
     }
 
     /* Sections */
