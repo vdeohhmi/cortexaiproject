@@ -13,39 +13,42 @@
       --primary: #4a00e0;
       --secondary: #8e2de2;
       --logo-green: #00ff00;
-      --nav-bg: #1f1f2e;
-      --nav-text: #fff;
+      --nav-bg: rgba(0,0,0,0.85);
+      --nav-bg-scrolled: rgba(0,0,0,0.95);
+      --nav-text: #ffffff;
       --ease: 0.3s ease;
     }
 
-    /* Globals */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* reset & base */
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: #fff;
+      font-family:'Inter',sans-serif;
+      line-height:1.6;
+      color:#333;
+      background:#fff;
     }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; height: auto; }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; width:100%; height:auto; }
 
-    /* Container */
+    /* container */
     .container {
       width: min(90%, 1200px);
       margin: 0 auto;
     }
 
-    /* Header & Nav */
+    /* header/nav */
     header {
-      position: fixed; top: 0; left: 0; right: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
       background: var(--nav-bg);
-      padding: 1rem 0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      padding: 0.75rem 0;
       z-index: 1000;
       transition: background var(--ease);
     }
-    header.scrolled { background: rgba(14,15,21,0.95); }
-    .nav-wrapper {
+    header.scrolled {
+      background: var(--nav-bg-scrolled);
+    }
+    .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -54,7 +57,9 @@
       display: flex;
       align-items: center;
     }
-    .logo img { width: 56px; height: 56px; }
+    .logo img {
+      width: 56px; height: 56px;
+    }
     .logo h1 {
       margin-left: 0.5rem;
       font-size: 1.8rem;
@@ -63,9 +68,9 @@
     nav { position: relative; }
     .nav-toggle {
       display: none;
-      font-size: 1.5rem;
       background: none;
       border: none;
+      font-size: 1.5rem;
       color: var(--nav-text);
       cursor: pointer;
     }
@@ -75,65 +80,80 @@
       gap: 1.5rem;
     }
     ul.nav-list li a {
+      display: block;
       padding: 0.6rem 1.2rem;
-      border-radius: 999px;
+      color: var(--nav-text) !important;
       font-weight: 600;
-      transition: background var(--ease), box-shadow var(--ease);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-radius: 999px;
+      transition: background var(--ease), box-shadow var(--ease), opacity var(--ease);
+      opacity: 0.9;
     }
     ul.nav-list li a:hover,
     ul.nav-list li a.active {
       background: var(--primary);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
-    /* Mobile nav */
+    /* mobile menu */
     @media (max-width: 768px) {
       .nav-toggle { display: block; }
       ul.nav-list {
         position: absolute;
-        top: 64px; right: 0;
+        top: 60px; right: 1rem;
         flex-direction: column;
         background: var(--nav-bg);
         padding: 1rem;
         border-radius: 8px;
         display: none;
       }
-      nav.open ul.nav-list { display: flex; }
-      ul.nav-list li + li { margin-top: 0.5rem; }
+      nav.open ul.nav-list {
+        display: flex;
+      }
+      ul.nav-list li + li {
+        margin-top: 0.5rem;
+      }
     }
 
-    /* Hero banner */
+    /* hero */
     .hero {
-      padding-top: 80px; /* space for fixed header */
+      margin-top: 60px;       /* header height */
+      height: 50vh;           /* smaller, never full-screen */
+      min-height: 300px;
+      max-height: 450px;
+      position: relative;
       overflow: hidden;
-      max-height: 400px;
     }
     .hero img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;      /* fills container without white bars */
       object-position: center;
       transition: transform 1s var(--ease);
     }
-    .hero img:hover { transform: scale(1.02); }
+    .hero img:hover {
+      transform: scale(1.02);
+    }
 
-    /* Sections */
+    /* sections */
     section {
       padding: 4rem 0;
     }
     .section-title {
-      text-align: center;
       color: var(--primary);
       font-size: 2rem;
+      text-align: center;
       margin-bottom: 2rem;
     }
 
-    /* Grid cards */
+    /* grid cards */
     .grid {
       display: grid;
       gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
     }
     .card {
       background: #f9f9f9;
@@ -147,9 +167,12 @@
       transform: translateY(-5px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.15);
     }
-    .card h3 { color: var(--primary); margin-bottom: 0.5rem; }
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
 
-    /* CTA */
+    /* CTA button */
     .cta {
       text-align: center;
       margin: 4rem 0;
@@ -169,7 +192,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* Form */
+    /* form */
     form {
       max-width: 500px;
       margin: 0 auto;
@@ -179,7 +202,11 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .form-group { margin-bottom: 1rem; }
-    label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
     input, select {
       width: 100%;
       padding: 0.75rem;
@@ -205,7 +232,7 @@
     }
     button[type="submit"]:hover { opacity: 0.9; }
 
-    /* Footer */
+    /* footer */
     footer {
       background: #222;
       color: #aaa;
@@ -219,12 +246,12 @@
 
   <!-- HEADER -->
   <header id="header">
-    <div class="container nav-wrapper">
+    <div class="container nav-inner">
       <div class="logo">
-        <img src="logo.png" alt="Cortex.ai Logo" />
+        <img src="logo.png" alt="Cortex.ai logo" />
         <h1>Cortex.ai</h1>
       </div>
-      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
       <nav>
         <ul class="nav-list">
           <li><a href="#hero" class="active">Home</a></li>
@@ -240,17 +267,16 @@
 
   <!-- HERO -->
   <section id="hero" class="hero">
-    <img src="banner-landscape.png" alt="High school students transitioning to AI and college" />
+    <img src="banner-landscape.png"
+         alt="High school students transitioning to AI and college" />
   </section>
 
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <h2 class="section-title">About Cortex.ai Bootcamp</h2>
-      <p>
-        Experience a 6-week immersive program designed for high school students to develop in-demand AI
-        skills through hands-on projects and expert-led sessions.
-      </p>
+      <p>Experience a 6-week immersive program designed for high school students to develop
+         in-demand AI skills through hands-on projects and expert-led sessions.</p>
     </div>
   </section>
 
@@ -283,9 +309,7 @@
   <section id="instructors">
     <div class="container">
       <h2 class="section-title">Certified Educators</h2>
-      <p>
-        All sessions are led by certified high school instructors with real classroom experience.
-      </p>
+      <p>All sessions are led by certified high school instructors with real classroom experience.</p>
     </div>
   </section>
 
@@ -361,27 +385,28 @@
     </div>
   </footer>
 
-  <!-- SCRIPTS -->
   <script>
-    // toggle mobile nav
-    document.querySelector('.nav-toggle').addEventListener('click', () => {
-      document.querySelector('nav').classList.toggle('open');
-    });
+    // mobile nav toggle
+    document.querySelector('.nav-toggle')
+      .addEventListener('click', () => document.querySelector('nav').classList.toggle('open'));
+
     // header background on scroll
     window.addEventListener('scroll', () => {
       document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
     });
-    // registration form submit
-    document.getElementById('registration-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      fetch('https://script.google.com/macros/s/…/exec', {
-        method: 'POST',
-        body: new FormData(e.target)
-      })
+
+    // form submission
+    document.getElementById('registration-form')
+      .addEventListener('submit', e => {
+        e.preventDefault();
+        fetch('https://script.google.com/macros/s/…/exec', {
+          method: 'POST',
+          body: new FormData(e.target)
+        })
         .then(() => alert('Registration successful!'))
         .catch(() => alert('Error submitting form.'));
-      e.target.reset();
-    });
+        e.target.reset();
+      });
   </script>
 </body>
 </html>
