@@ -27,7 +27,7 @@ header {
   top: 0;
   width: 100%;
   padding: 1rem 2rem;
-  background: #12131A;
+  background: var(--nav-bg);
   box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   z-index: 1000;
   transition: background var(--ease);
@@ -47,23 +47,17 @@ header.scrolled {
   align-items: center;
 }
 .site-logo {
-  width: 48px;
-  height: 48px;
-  width: 56px;
-  height: 56px;
-  background: #fff;
-  border-radius: 50%;
-  padding: 6px;
-  padding: 4px;
-  border: 3px solid var(--logo-green);
-  box-shadow: 0 0 8px rgba(0,255,0,0.5);
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  background: transparent;
+  filter: drop-shadow(0 0 8px var(--logo-green));
 }
 .logo-text {
   color: var(--logo-green);
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 800;
   margin-left: 0.5rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 nav {
   position: relative;
@@ -84,10 +78,9 @@ ul {
 li a {
   color: var(--nav-text);
   font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  background: transparent;
   transition: background var(--ease), color var(--ease);
 }
 li a:hover {
@@ -98,7 +91,6 @@ li a.active {
   background: var(--primary);
   color: #fff;
 }
-
 /* Mobile Nav */
     @media(max-width:768px) {
       .nav-toggle { display:block; }
@@ -110,9 +102,29 @@ li a.active {
     /* Hero */
     .hero { margin-top:80px; height:60vh; min-height:400px; position:relative; overflow:hidden; }
     .hero::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(74,0,224,0.6),rgba(142,45,226,0.6)); mix-blend-mode:overlay; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* light gradient overlay for readability without darkening too much */
+      background: linear-gradient(135deg, rgba(74,0,224,0.3), rgba(142,45,226,0.3));
+      mix-blend-mode: overlay;
+    }
     .hero img { width:100%; height:100%; object-fit:cover; transform:scale(1.1); transition:transform 20s ease-out; }
     .hero:hover img { transform:scale(1); }
     .hero .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:#fff; padding:0 1rem; }
+    .hero .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      /* lighter overlay for better image visibility */
+      background: rgba(0, 0, 0, 0.3) !important;
+      padding: 0 1rem;
+    }
     .hero h1 { font-size:3rem; font-weight:800; letter-spacing:2px; margin-bottom:0.5rem; }
     .hero p { font-size:1.2rem; margin-bottom:1.5rem; opacity:0.9; }
     .hero .btn { background:linear-gradient(135deg,var(--primary),var(--secondary)); color:#fff; padding:0.75rem 2rem; border:none; border-radius:50px; font-size:1rem; font-weight:600; transition:transform var(--ease); }
@@ -154,7 +166,19 @@ li a.active {
       .hero h1 { font-size:2.5rem; }
       .hero p { font-size:1rem; }
     }
-  </style>
+    /* Override for larger logo and better banner readability */
+  .site-logo {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .hero .overlay {
+    background: rgba(0, 0, 0, 0.7) !important;
+  }
+  .hero .overlay h1,
+  .hero .overlay p {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+  }
+</style>
 </head>
 <body>
   <header id="header">
