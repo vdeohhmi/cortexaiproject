@@ -1,3 +1,6 @@
+Here’s the **complete, self-contained HTML** with your Apps Script URL wired into the registration form. Just save as `index.html`, drop in your `logo.png` and `banner-landscape.png`, and you’re ready to deploy.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,9 +78,9 @@
       background:none; border:none; cursor:pointer;
     }
 
-    /* HERO – NOW SOFTER */
+    /* HERO */
     #hero {
-      margin-top:80px;  /* header space */
+      margin-top:80px;
       width:100%; padding:0;
       height:60vh; min-height:400px;
       position:relative; overflow:hidden;
@@ -85,18 +88,18 @@
     #hero img {
       width:100vw; height:100%;
       object-fit:cover;
-      filter: brightness(0.5);    /* dimmed more */
+      filter: brightness(0.5);
       display:block;
     }
     #hero .overlay {
       position:absolute; inset:0;
-      background: rgba(0,0,0,0.6); /* darker overlay */
+      background: rgba(0,0,0,0.6);
       display:flex; flex-direction:column;
       align-items:center; justify-content:center;
       text-align:center; padding:0 1rem;
     }
     #hero h1 {
-      color: var(--text-light-90);  /* softened white */
+      color: var(--text-light-90);
       font-size:3rem; font-weight:700;
       margin-bottom:0.5rem;
     }
@@ -157,8 +160,8 @@
     }
     .cta .btn { background:#8e2de2; }
 
-    /* FORM */
-    form {
+    /* REGISTER FORM */
+    #register form {
       max-width:600px; margin:0 auto;
       background:#fff; padding:3rem 2rem;
       border-radius:12px; box-shadow:0 8px 16px var(--card-shadow);
@@ -191,7 +194,7 @@
       transform: translateY(-2px);
     }
 
-    /* FOOTER */
+    /* CONTACT & FOOTER */
     #contact a {
       color: var(--primary); font-weight:600;
       text-decoration:none;
@@ -246,7 +249,7 @@
       <h1>Learn AI Today for a Brighter Tomorrow</h1>
       <p>Hands-on projects taught by certified high school instructors.</p>
       <button class="btn"
-        onclick="document.getElementById('registration-form').scrollIntoView({behavior:'smooth'})">
+        onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
         Join the Bootcamp
       </button>
     </div>
@@ -288,7 +291,7 @@
   <section id="instructors">
     <h2 class="section-title">Meet the Instructors</h2>
     <p style="max-width:800px; margin:0 auto; text-align:center;">
-      All sessions are led by certified high school educators with both classroom and industry experience.
+      All sessions are led by certified high school educators with classroom and industry experience.
     </p>
   </section>
 
@@ -296,7 +299,7 @@
   <section class="cta">
     <h2>Ready to Launch Your AI Journey?</h2>
     <button class="btn"
-      onclick="document.getElementById('registration-form').scrollIntoView({behavior:'smooth'})">
+      onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
       Register Now
     </button>
   </section>
@@ -304,7 +307,11 @@
   <!-- REGISTER -->
   <section id="register">
     <h2 class="section-title">Register</h2>
-    <form id="registration-form">
+    <form
+      id="registration-form"
+      action="https://script.google.com/macros/s/AKfycbz7fahb0DSh1DPZtTMvf_0RSTaFtu6hNcYhiVHeLbTZVRSBjEtzmc7QkxR1M_sl3KFO/exec"
+      method="POST"
+    >
       <div class="form-group">
         <label for="fname">First Name</label>
         <input type="text" id="fname" name="first_name" required>
@@ -319,7 +326,14 @@
       </div>
       <div class="form-group">
         <label for="phone">Contact Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="+1234567890" pattern="^\+?\d{10,15}$" required>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="+1234567890"
+          pattern="^\+?\d{10,15}$"
+          required
+        >
       </div>
       <div class="form-group">
         <label for="school">High School</label>
@@ -359,13 +373,26 @@
       .addEventListener('click', () =>
         document.querySelector('nav').classList.toggle('open')
       );
-    // Form submit handler
+
+    // Form submission via Apps Script
     document.getElementById('registration-form')
-      .addEventListener('submit', e => {
+      .addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('Thank you! We’ll be in touch.');
-        e.target.reset();
+        const form = e.target;
+        fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new FormData(form)
+        })
+        .then(() => {
+          alert('Thank you! Your registration has been received.');
+          form.reset();
+        })
+        .catch(() => {
+          alert('Oops! Something went wrong. Please try again.');
+        });
       });
   </script>
 </body>
 </html>
+```
