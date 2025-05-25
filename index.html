@@ -12,14 +12,11 @@
     :root {
       --primary: #4a00e0;
       --secondary: #8e2de2;
-      --logo-green: #00ff00;
-      --nav-bg: rgba(0,0,0,0.85);
-      --nav-bg-scrolled: rgba(0,0,0,0.95);
-      --nav-text: #ffffff;
+      --logo-accent: #00e676;
+      --nav-bg: #111;
       --ease: 0.3s ease;
     }
-
-    /* reset & base */
+    /* Reset */
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family:'Inter',sans-serif;
@@ -27,26 +24,25 @@
       color:#333;
       background:#fff;
     }
-    a { color:inherit; text-decoration:none; }
-    img { display:block; width:100%; height:auto; }
+    a { text-decoration:none; }
 
-    /* container */
+    /* Container helper */
     .container {
       width: min(90%, 1200px);
       margin: 0 auto;
     }
 
-    /* header/nav */
+    /* HEADER */
     header {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top:0; left:0; right:0;
       background: var(--nav-bg);
       padding: 0.75rem 0;
-      z-index: 1000;
+      z-index:1000;
       transition: background var(--ease);
     }
     header.scrolled {
-      background: var(--nav-bg-scrolled);
+      background: #000;
     }
     .nav-inner {
       display: flex;
@@ -54,192 +50,184 @@
       justify-content: space-between;
     }
     .logo {
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
     }
     .logo img {
-      width: 56px; height: 56px;
+      width:50px; height:50px;
     }
     .logo h1 {
-      margin-left: 0.5rem;
-      font-size: 1.8rem;
-      color: var(--logo-green);
+      margin-left:0.5rem;
+      font-size:1.6rem;
+      font-weight:800;
+      color: var(--logo-accent);
     }
-    nav { position: relative; }
+    nav { position:relative; }
     .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: var(--nav-text);
-      cursor: pointer;
+      display:none;
+      font-size:1.4rem;
+      color:#fff;
+      background:none;
+      border:none;
+      cursor:pointer;
     }
     ul.nav-list {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
+      list-style:none;
+      display:flex;
+      gap:2rem;
     }
     ul.nav-list li a {
-      display: block;
-      padding: 0.6rem 1.2rem;
-      color: var(--nav-text) !important;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-radius: 999px;
-      transition: background var(--ease), box-shadow var(--ease), opacity var(--ease);
-      opacity: 0.9;
+      color:#fff;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+      padding:0.5rem 0;
+      position:relative;
+      transition: color var(--ease);
+    }
+    ul.nav-list li a::after {
+      content:"";
+      position:absolute;
+      bottom:-4px; left:0; right:0;
+      height:2px;
+      background:var(--primary);
+      transform: scaleX(0);
+      transform-origin:left;
+      transition: transform var(--ease);
     }
     ul.nav-list li a:hover,
     ul.nav-list li a.active {
-      background: var(--primary);
-      opacity: 1;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      color:var(--primary);
+    }
+    ul.nav-list li a:hover::after,
+    ul.nav-list li a.active::after {
+      transform: scaleX(1);
     }
 
-    /* mobile menu */
-    @media (max-width: 768px) {
-      .nav-toggle { display: block; }
+    /* Mobile nav */
+    @media (max-width:768px) {
+      .nav-toggle { display:block; }
       ul.nav-list {
-        position: absolute;
-        top: 60px; right: 1rem;
-        flex-direction: column;
+        position:absolute;
+        top:60px; right:1rem;
+        flex-direction:column;
         background: var(--nav-bg);
-        padding: 1rem;
-        border-radius: 8px;
-        display: none;
+        padding:1rem;
+        border-radius:6px;
+        display:none;
       }
-      nav.open ul.nav-list {
-        display: flex;
-      }
-      ul.nav-list li + li {
-        margin-top: 0.5rem;
-      }
+      nav.open ul.nav-list { display:flex; }
+      ul.nav-list li + li { margin-top:0.75rem; }
     }
 
-    /* hero */
+    /* HERO as background */
     .hero {
-      margin-top: 60px;       /* header height */
-      height: 50vh;           /* smaller, never full-screen */
-      min-height: 300px;
-      max-height: 450px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;      /* fills container without white bars */
-      object-position: center;
-      transition: transform 1s var(--ease);
-    }
-    .hero img:hover {
-      transform: scale(1.02);
+      margin-top:60px;       /* header height */
+      height:400px;          /* fixed banner size */
+      background: url('banner-landscape.png') center/contain no-repeat;
+      background-color:#fff; /* any fallback */
+      position:relative;
+      overflow:hidden;
     }
 
-    /* sections */
+    /* SECTIONS */
     section {
-      padding: 4rem 0;
+      padding:4rem 0;
     }
     .section-title {
+      font-size:2rem;
+      text-align:center;
       color: var(--primary);
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom:2rem;
     }
 
-    /* grid cards */
+    /* GRID CARDS */
     .grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      display:grid;
+      gap:1.5rem;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
     }
     .card {
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background:#f8f8f8;
+      border-radius:8px;
+      padding:1.5rem;
+      text-align:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
       transition: transform var(--ease), box-shadow var(--ease);
     }
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      transform:translateY(-4px);
+      box-shadow:0 6px 14px rgba(0,0,0,0.15);
     }
-    .card h3 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
+    .card h3 { color:var(--primary); margin-bottom:0.5rem; }
 
-    /* CTA button */
+    /* CTA BUTTON */
     .cta {
-      text-align: center;
-      margin: 4rem 0;
+      text-align:center;
+      margin:4rem 0;
     }
     .cta button {
-      background: var(--secondary);
-      color: #fff;
-      border: none;
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
+      background:var(--secondary);
+      color:#fff;
+      border:none;
+      padding:0.75rem 2rem;
+      font-size:1rem;
+      border-radius:4px;
+      cursor:pointer;
       transition: opacity var(--ease), box-shadow var(--ease);
     }
     .cta button:hover {
-      opacity: 0.9;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity:0.9;
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* form */
+    /* FORM */
     form {
-      max-width: 500px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width:500px;
+      margin:0 auto;
+      padding:2rem;
+      background:#fff;
+      border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
     }
-    .form-group { margin-bottom: 1rem; }
+    .form-group { margin-bottom:1rem; }
     label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
+      display:block;
+      margin-bottom:0.5rem;
+      font-weight:600;
     }
     input, select {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      transition: border-color var(--ease), box-shadow var(--ease);
+      width:100%;
+      padding:0.75rem;
+      border:1px solid #ccc;
+      border-radius:4px;
+      transition:border-color var(--ease), box-shadow var(--ease);
     }
     input:focus, select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(74,0,224,0.15);
+      outline:none;
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(74,0,224,0.15);
     }
     button[type="submit"] {
-      width: 100%;
-      padding: 0.75rem;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity var(--ease);
+      width:100%;
+      padding:0.75rem;
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      border-radius:4px;
+      font-weight:600;
+      cursor:pointer;
+      transition:opacity var(--ease);
     }
-    button[type="submit"]:hover { opacity: 0.9; }
+    button[type="submit"]:hover { opacity:0.9; }
 
-    /* footer */
+    /* FOOTER */
     footer {
-      background: #222;
-      color: #aaa;
-      padding: 2rem 0;
-      text-align: center;
+      background:#111;
+      color:#aaa;
+      text-align:center;
+      padding:2rem 0;
     }
-    footer a { color: var(--secondary); }
+    footer a { color:var(--secondary); }
   </style>
 </head>
 <body>
@@ -265,18 +253,14 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="hero" class="hero">
-    <img src="banner-landscape.png"
-         alt="High school students transitioning to AI and college" />
-  </section>
+  <!-- HERO BANNER -->
+  <div class="hero"></div>
 
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <h2 class="section-title">About Cortex.ai Bootcamp</h2>
-      <p>Experience a 6-week immersive program designed for high school students to develop
-         in-demand AI skills through hands-on projects and expert-led sessions.</p>
+      <p>Experience a 6-week immersive program designed for high school students to develop in-demand AI skills through hands-on projects and expert-led sessions.</p>
     </div>
   </section>
 
@@ -285,22 +269,10 @@
     <div class="container">
       <h2 class="section-title">Curriculum Highlights</h2>
       <div class="grid">
-        <div class="card">
-          <h3>Python Basics</h3>
-          <p>Learn foundational programming concepts.</p>
-        </div>
-        <div class="card">
-          <h3>Data Analysis</h3>
-          <p>Manipulate and visualize data sets.</p>
-        </div>
-        <div class="card">
-          <h3>Machine Learning</h3>
-          <p>Understand supervised and unsupervised models.</p>
-        </div>
-        <div class="card">
-          <h3>Deep Learning</h3>
-          <p>Build neural networks for real-world tasks.</p>
-        </div>
+        <div class="card"><h3>Python Basics</h3><p>Learn foundational programming concepts.</p></div>
+        <div class="card"><h3>Data Analysis</h3><p>Manipulate and visualize data sets.</p></div>
+        <div class="card"><h3>Machine Learning</h3><p>Understand supervised and unsupervised models.</p></div>
+        <div class="card"><h3>Deep Learning</h3><p>Build neural networks for real-world tasks.</p></div>
       </div>
     </div>
   </section>
@@ -330,30 +302,23 @@
       <form id="registration-form">
         <div class="form-group">
           <label for="fname">First Name</label>
-          <input type="text" id="fname" name="first_name" required />
+          <input type="text" id="fname" name="first_name" required/>
         </div>
         <div class="form-group">
           <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="last_name" required />
+          <input type="text" id="lname" name="last_name" required/>
         </div>
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" required />
+          <input type="email" id="email" name="email" required/>
         </div>
         <div class="form-group">
           <label for="phone">Contact Number</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="+1234567890"
-            pattern="^\+?\d{10,15}$"
-            required
-          />
+          <input type="tel" id="phone" name="phone" placeholder="+1234567890" pattern="^\+?\d{10,15}$" required/>
         </div>
         <div class="form-group">
           <label for="school">High School</label>
-          <input type="text" id="school" name="school" required />
+          <input type="text" id="school" name="school" required/>
         </div>
         <div class="form-group">
           <label for="grade">Grade</label>
@@ -371,10 +336,7 @@
   <section id="contact">
     <div class="container">
       <h2 class="section-title">Contact Us</h2>
-      <p>
-        Email: <a href="mailto:info@cortex.ai">info@cortex.ai</a> |
-        Phone: <a href="tel:+1234567890">+1 (234) 567-890</a>
-      </p>
+      <p>Email: <a href="mailto:info@cortex.ai">info@cortex.ai</a> | Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
     </div>
   </section>
 
@@ -390,18 +352,17 @@
     document.querySelector('.nav-toggle')
       .addEventListener('click', () => document.querySelector('nav').classList.toggle('open'));
 
-    // header background on scroll
+    // header darken on scroll
     window.addEventListener('scroll', () => {
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    // form submission
+    // form submit
     document.getElementById('registration-form')
       .addEventListener('submit', e => {
         e.preventDefault();
         fetch('https://script.google.com/macros/s/…/exec', {
-          method: 'POST',
-          body: new FormData(e.target)
+          method:'POST', body: new FormData(e.target)
         })
         .then(() => alert('Registration successful!'))
         .catch(() => alert('Error submitting form.'));
