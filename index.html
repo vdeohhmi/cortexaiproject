@@ -13,16 +13,8 @@
 
   <style>
     /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; scroll-behavior: smooth; }
 
     /* VARIABLES */
     :root {
@@ -48,47 +40,29 @@
 
     /* HEADER */
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
+      position: fixed; top:0; left:0; right:0;
       background: var(--nav-bg);
-      padding: 1rem 2rem;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      padding:1rem 2rem;
+      z-index:1000;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
     }
     .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width:1200px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
     }
-    .logo-container {
-      display: flex;
-      align-items: center;
-    }
-    .site-logo {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-    }
+    .logo-container { display:flex; align-items:center; }
+    .site-logo { width:60px; height:60px; object-fit:cover; }
     .logo-text {
       color: var(--accent);
-      font-size: 1.75rem;
-      font-weight: 800;
-      margin-left: 0.5rem;
+      font-size:1.75rem; font-weight:800;
+      margin-left:0.5rem;
     }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
+    nav ul { list-style:none; display:flex; gap:2rem; }
     nav a {
       color: var(--text-light);
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      transition: background var(--ease), color var(--ease);
+      font-weight:600; text-decoration:none;
+      padding:0.5rem 1rem; border-radius:999px;
+      transition:background var(--ease),color var(--ease);
     }
     nav a:hover,
     nav a.active {
@@ -96,63 +70,48 @@
       color: #fff;
     }
     .nav-toggle {
-      display: none;
-      font-size: 1.5rem;
-      color: var(--text-light);
-      background: none;
-      border: none;
-      cursor: pointer;
+      display:none;
+      font-size:1.5rem; color:var(--text-light);
+      background:none; border:none; cursor:pointer;
     }
 
-    /* HERO */
+    /* HERO – NOW SOFTER */
     #hero {
-      margin-top: 80px;    /* space for fixed header */
-      width: 100%;
-      padding: 0;          /* remove any section padding */
-      height: 60vh;
-      min-height: 400px;
-      position: relative;
-      overflow: hidden;
+      margin-top:80px;  /* header space */
+      width:100%; padding:0;
+      height:60vh; min-height:400px;
+      position:relative; overflow:hidden;
     }
     #hero img {
-      width: 100vw;        /* ensure full viewport width */
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.6);
-      display: block;
+      width:100vw; height:100%;
+      object-fit:cover;
+      filter: brightness(0.5);    /* dimmed more */
+      display:block;
     }
     #hero .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 1rem;
+      position:absolute; inset:0;
+      background: rgba(0,0,0,0.6); /* darker overlay */
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; padding:0 1rem;
     }
     #hero h1 {
-      color: var(--text-light);
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+      color: var(--text-light-90);  /* softened white */
+      font-size:3rem; font-weight:700;
+      margin-bottom:0.5rem;
     }
     #hero p {
       color: var(--text-light-80);
-      font-size: 1.125rem;
-      margin-bottom: 1.5rem;
+      font-size:1.125rem; margin-bottom:1.5rem;
     }
     #hero .btn {
       background: var(--primary);
       color: #fff;
-      padding: 0.75rem 2rem;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background var(--ease), transform var(--ease);
+      padding:0.75rem 2rem;
+      border:none; border-radius:50px;
+      font-size:1rem; font-weight:600;
+      cursor:pointer;
+      transition:background var(--ease),transform var(--ease);
     }
     #hero .btn:hover {
       background: var(--primary-dark);
@@ -160,135 +119,100 @@
     }
 
     /* SECTIONS */
-    section {
-      padding: 6rem 2rem;
-    }
+    section { padding:6rem 2rem; }
     .section-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 2rem;
+      font-size:2.5rem; font-weight:800;
+      text-align:center; margin-bottom:2rem;
       background: linear-gradient(135deg, var(--primary), #8e2de2);
-      background-clip: text;
-      -webkit-background-clip: text;
+      background-clip: text; -webkit-background-clip: text;
       color: transparent;
     }
 
     /* GRID CARDS */
     .grid {
-      display: grid;
-      gap: 2rem;
+      display:grid; gap:2rem;
       grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
     }
     .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px var(--card-shadow);
-      padding: 2rem;
+      background:#fff; border-radius:12px;
+      box-shadow:0 8px 16px var(--card-shadow);
+      padding:2rem;
       transition: transform var(--ease), box-shadow var(--ease);
     }
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+      box-shadow:0 12px 24px rgba(0,0,0,0.1);
     }
     .card h3 {
       color: var(--primary);
-      margin-bottom: 0.75rem;
-      font-weight: 600;
+      margin-bottom:0.75rem; font-weight:600;
     }
-    .card p {
-      color: #555;
-    }
+    .card p { color:#555; }
 
     /* CTA */
     .cta {
       background: rgba(142,45,226,0.1);
-      text-align: center;
-      padding: 4rem 2rem;
-      border-radius: 12px;
-      margin: 4rem 0;
+      text-align:center; padding:4rem 2rem;
+      border-radius:12px; margin:4rem 0;
     }
-    .cta .btn {
-      background: #8e2de2;
-    }
+    .cta .btn { background:#8e2de2; }
 
     /* FORM */
     form {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 3rem 2rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px var(--card-shadow);
+      max-width:600px; margin:0 auto;
+      background:#fff; padding:3rem 2rem;
+      border-radius:12px; box-shadow:0 8px 16px var(--card-shadow);
     }
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
+    .form-group { margin-bottom:1.5rem; }
     label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #333;
+      display:block; font-weight:600;
+      margin-bottom:0.5rem; color:#333;
     }
     input, select {
-      width: 100%;
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      transition: border-color var(--ease), box-shadow var(--ease);
+      width:100%; padding:1rem;
+      border:1px solid #ddd; border-radius:8px;
+      transition:border-color var(--ease), box-shadow var(--ease);
     }
     input:focus, select:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 8px rgba(124,0,255,0.2);
-      outline: none;
+      box-shadow:0 0 8px rgba(124,0,255,0.2);
+      outline:none;
     }
     button[type="submit"] {
-      width: 100%;
-      padding: 1rem;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background var(--ease), transform var(--ease);
+      width:100%; padding:1rem;
+      background:var(--primary); color:#fff;
+      border:none; border-radius:50px;
+      font-size:1.1rem; font-weight:600;
+      cursor:pointer;
+      transition:background var(--ease), transform var(--ease);
     }
     button[type="submit"]:hover {
-      background: #5c00bb;
+      background:#5c00bb;
       transform: translateY(-2px);
     }
 
-    /* CONTACT & FOOTER */
+    /* FOOTER */
     #contact a {
-      color: var(--primary);
-      font-weight: 600;
-      text-decoration: none;
+      color: var(--primary); font-weight:600;
+      text-decoration:none;
     }
     footer {
-      background: #222;
-      color: #aaa;
-      text-align: center;
-      padding: 3rem 1rem;
+      background:#222; color:#aaa;
+      text-align:center; padding:3rem 1rem;
     }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav ul { display: none; }
-      .nav-toggle { display: block; }
+      nav ul { display:none; }
+      .nav-toggle { display:block; }
       nav.open ul {
-        display: flex;
-        flex-direction: column;
+        display:flex; flex-direction:column;
         background: var(--nav-bg);
-        position: absolute;
-        top: 100%;
-        right: 2rem;
-        padding: 1rem;
-        border-radius: 8px;
-        gap: 1rem;
+        position:absolute; top:100%; right:2rem;
+        padding:1rem; border-radius:8px; gap:1rem;
       }
-      #hero h1 { font-size: 2.5rem; }
-      #hero p  { font-size: 1rem; }
+      #hero h1 { font-size:2.5rem; }
+      #hero p  { font-size:1rem; }
     }
   </style>
 </head>
@@ -322,7 +246,7 @@
       <h1>Learn AI Today for a Brighter Tomorrow</h1>
       <p>Hands-on projects taught by certified high school instructors.</p>
       <button class="btn"
-        onclick="document.getElementById('registration-form').scrollIntoView({ behavior:'smooth' })">
+        onclick="document.getElementById('registration-form').scrollIntoView({behavior:'smooth'})">
         Join the Bootcamp
       </button>
     </div>
@@ -364,8 +288,7 @@
   <section id="instructors">
     <h2 class="section-title">Meet the Instructors</h2>
     <p style="max-width:800px; margin:0 auto; text-align:center;">
-      All sessions are led by certified high school educators with both classroom and
-      industry experience.
+      All sessions are led by certified high school educators with both classroom and industry experience.
     </p>
   </section>
 
@@ -373,7 +296,7 @@
   <section class="cta">
     <h2>Ready to Launch Your AI Journey?</h2>
     <button class="btn"
-      onclick="document.getElementById('registration-form').scrollIntoView({ behavior:'smooth' })">
+      onclick="document.getElementById('registration-form').scrollIntoView({behavior:'smooth'})">
       Register Now
     </button>
   </section>
@@ -396,8 +319,7 @@
       </div>
       <div class="form-group">
         <label for="phone">Contact Number</label>
-        <input type="tel" id="phone" name="phone"
-               placeholder="+1234567890" pattern="^\+?\d{10,15}$" required>
+        <input type="tel" id="phone" name="phone" placeholder="+1234567890" pattern="^\+?\d{10,15}$" required>
       </div>
       <div class="form-group">
         <label for="school">High School</label>
@@ -437,8 +359,7 @@
       .addEventListener('click', () =>
         document.querySelector('nav').classList.toggle('open')
       );
-
-    // Simple form submit handler
+    // Form submit handler
     document.getElementById('registration-form')
       .addEventListener('submit', e => {
         e.preventDefault();
