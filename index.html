@@ -16,34 +16,33 @@
       --nav-bg: #111;
       --ease: 0.3s ease;
     }
-    /* Reset */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family:'Inter',sans-serif;
-      line-height:1.6;
-      color:#333;
-      background:#fff;
-    }
-    a { text-decoration:none; }
 
-    /* Container helper */
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+    }
+    a { text-decoration: none; }
+
+    /* Container */
     .container {
       width: min(90%, 1200px);
       margin: 0 auto;
     }
 
-    /* HEADER */
+    /* Header & Nav */
     header {
       position: fixed;
-      top:0; left:0; right:0;
+      top: 0; left: 0; right: 0;
       background: var(--nav-bg);
       padding: 0.75rem 0;
-      z-index:1000;
+      z-index: 1000;
       transition: background var(--ease);
     }
-    header.scrolled {
-      background: #000;
-    }
+    header.scrolled { background: #000; }
     .nav-inner {
       display: flex;
       align-items: center;
@@ -53,181 +52,188 @@
       display: flex; align-items: center;
     }
     .logo img {
-      width:50px; height:50px;
+      width: 50px; height: 50px;
     }
     .logo h1 {
-      margin-left:0.5rem;
-      font-size:1.6rem;
-      font-weight:800;
+      margin-left: 0.5rem;
+      font-size: 1.6rem;
+      font-weight: 800;
       color: var(--logo-accent);
     }
-    nav { position:relative; }
+    nav { position: relative; }
     .nav-toggle {
-      display:none;
-      font-size:1.4rem;
-      color:#fff;
-      background:none;
-      border:none;
-      cursor:pointer;
+      display: none;
+      font-size: 1.4rem;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
     ul.nav-list {
-      list-style:none;
-      display:flex;
-      gap:2rem;
+      list-style: none;
+      display: flex;
+      gap: 2rem;
     }
     ul.nav-list li a {
-      color:#fff;
-      font-weight:600;
-      text-transform:uppercase;
-      letter-spacing:0.5px;
-      padding:0.5rem 0;
-      position:relative;
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.5rem 0;
+      position: relative;
       transition: color var(--ease);
     }
     ul.nav-list li a::after {
-      content:"";
-      position:absolute;
-      bottom:-4px; left:0; right:0;
-      height:2px;
-      background:var(--primary);
+      content: "";
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 2px;
+      background: var(--primary);
       transform: scaleX(0);
-      transform-origin:left;
+      transform-origin: left;
       transition: transform var(--ease);
     }
     ul.nav-list li a:hover,
     ul.nav-list li a.active {
-      color:var(--primary);
+      color: var(--primary);
     }
     ul.nav-list li a:hover::after,
     ul.nav-list li a.active::after {
       transform: scaleX(1);
     }
 
-    /* Mobile nav */
-    @media (max-width:768px) {
-      .nav-toggle { display:block; }
+    /* Mobile Nav */
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
       ul.nav-list {
-        position:absolute;
-        top:60px; right:1rem;
-        flex-direction:column;
+        position: absolute;
+        top: 60px; right: 1rem;
+        flex-direction: column;
         background: var(--nav-bg);
-        padding:1rem;
-        border-radius:6px;
-        display:none;
+        padding: 1rem;
+        border-radius: 6px;
+        display: none;
       }
-      nav.open ul.nav-list { display:flex; }
-      ul.nav-list li + li { margin-top:0.75rem; }
+      nav.open ul.nav-list { display: flex; }
+      ul.nav-list li + li { margin-top: 0.75rem; }
     }
 
-    /* HERO as background */
+    /* Hero Banner */
     .hero {
-      margin-top:60px;       /* header height */
-      height:400px;          /* fixed banner size */
-      background: url('banner-landscape.png') center/contain no-repeat;
-      background-color:#fff; /* any fallback */
-      position:relative;
-      overflow:hidden;
+      margin-top: 60px;      /* leave space for fixed header */
+      overflow: hidden;
+      width: 100vw;
+    }
+    .hero img {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;         /* full-screen width */
+      max-height: 400px;    /* cap height */
+      height: auto;
+      object-fit: contain;  /* show entire image */
+      display: block;
     }
 
-    /* SECTIONS */
+    /* Sections */
     section {
-      padding:4rem 0;
+      padding: 4rem 0;
     }
     .section-title {
-      font-size:2rem;
-      text-align:center;
+      text-align: center;
+      font-size: 2rem;
       color: var(--primary);
-      margin-bottom:2rem;
+      margin-bottom: 2rem;
     }
 
-    /* GRID CARDS */
+    /* Grid Cards */
     .grid {
-      display:grid;
-      gap:1.5rem;
+      display: grid;
+      gap: 1.5rem;
       grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
     }
     .card {
-      background:#f8f8f8;
-      border-radius:8px;
-      padding:1.5rem;
-      text-align:center;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       transition: transform var(--ease), box-shadow var(--ease);
     }
     .card:hover {
-      transform:translateY(-4px);
-      box-shadow:0 6px 14px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
-    .card h3 { color:var(--primary); margin-bottom:0.5rem; }
+    .card h3 { color: var(--primary); margin-bottom: 0.5rem; }
 
-    /* CTA BUTTON */
+    /* CTA Button */
     .cta {
-      text-align:center;
-      margin:4rem 0;
+      text-align: center;
+      margin: 4rem 0;
     }
     .cta button {
-      background:var(--secondary);
-      color:#fff;
-      border:none;
-      padding:0.75rem 2rem;
-      font-size:1rem;
-      border-radius:4px;
-      cursor:pointer;
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
       transition: opacity var(--ease), box-shadow var(--ease);
     }
     .cta button:hover {
-      opacity:0.9;
-      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0.9;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* FORM */
+    /* Form */
     form {
-      max-width:500px;
-      margin:0 auto;
-      padding:2rem;
-      background:#fff;
-      border-radius:8px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .form-group { margin-bottom:1rem; }
+    .form-group { margin-bottom: 1rem; }
     label {
-      display:block;
-      margin-bottom:0.5rem;
-      font-weight:600;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
     }
     input, select {
-      width:100%;
-      padding:0.75rem;
-      border:1px solid #ccc;
-      border-radius:4px;
-      transition:border-color var(--ease), box-shadow var(--ease);
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color var(--ease), box-shadow var(--ease);
     }
     input:focus, select:focus {
-      outline:none;
-      border-color:var(--primary);
-      box-shadow:0 0 0 3px rgba(74,0,224,0.15);
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(74,0,224,0.15);
     }
     button[type="submit"] {
-      width:100%;
-      padding:0.75rem;
-      background:var(--primary);
-      color:#fff;
-      border:none;
-      border-radius:4px;
-      font-weight:600;
-      cursor:pointer;
-      transition:opacity var(--ease);
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--ease);
     }
-    button[type="submit"]:hover { opacity:0.9; }
+    button[type="submit"]:hover { opacity: 0.9; }
 
-    /* FOOTER */
+    /* Footer */
     footer {
-      background:#111;
-      color:#aaa;
-      text-align:center;
-      padding:2rem 0;
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem 0;
     }
-    footer a { color:var(--secondary); }
+    footer a { color: var(--secondary); }
   </style>
 </head>
 <body>
@@ -236,7 +242,7 @@
   <header id="header">
     <div class="container nav-inner">
       <div class="logo">
-        <img src="logo.png" alt="Cortex.ai logo" />
+        <img src="logo.png" alt="Cortex.ai Logo" />
         <h1>Cortex.ai</h1>
       </div>
       <button class="nav-toggle" aria-label="Toggle menu">☰</button>
@@ -254,13 +260,21 @@
   </header>
 
   <!-- HERO BANNER -->
-  <div class="hero"></div>
+  <section id="hero" class="hero">
+    <img
+      src="banner-landscape.png"
+      alt="High school students transitioning to AI and college"
+    />
+  </section>
 
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <h2 class="section-title">About Cortex.ai Bootcamp</h2>
-      <p>Experience a 6-week immersive program designed for high school students to develop in-demand AI skills through hands-on projects and expert-led sessions.</p>
+      <p>
+        Experience a 6-week immersive program designed for high school students to develop
+        in-demand AI skills through hands-on projects and expert-led sessions.
+      </p>
     </div>
   </section>
 
@@ -269,10 +283,22 @@
     <div class="container">
       <h2 class="section-title">Curriculum Highlights</h2>
       <div class="grid">
-        <div class="card"><h3>Python Basics</h3><p>Learn foundational programming concepts.</p></div>
-        <div class="card"><h3>Data Analysis</h3><p>Manipulate and visualize data sets.</p></div>
-        <div class="card"><h3>Machine Learning</h3><p>Understand supervised and unsupervised models.</p></div>
-        <div class="card"><h3>Deep Learning</h3><p>Build neural networks for real-world tasks.</p></div>
+        <div class="card">
+          <h3>Python Basics</h3>
+          <p>Learn foundational programming concepts.</p>
+        </div>
+        <div class="card">
+          <h3>Data Analysis</h3>
+          <p>Manipulate and visualize data sets.</p>
+        </div>
+        <div class="card">
+          <h3>Machine Learning</h3>
+          <p>Understand supervised and unsupervised models.</p>
+        </div>
+        <div class="card">
+          <h3>Deep Learning</h3>
+          <p>Build neural networks for real-world tasks.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -281,7 +307,9 @@
   <section id="instructors">
     <div class="container">
       <h2 class="section-title">Certified Educators</h2>
-      <p>All sessions are led by certified high school instructors with real classroom experience.</p>
+      <p>
+        All sessions are led by certified high school instructors with real classroom experience.
+      </p>
     </div>
   </section>
 
@@ -289,36 +317,43 @@
   <section class="cta">
     <div class="container">
       <h2>Ready to Start?</h2>
-      <button onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
+      <button onclick="document.getElementById('register').scrollIntoView({ behavior: 'smooth' })">
         Register Now
       </button>
     </div>
   </section>
 
-  <!-- REGISTER -->
+  <!-- REGISTER FORM -->
   <section id="register">
     <div class="container">
       <h2 class="section-title">Register</h2>
       <form id="registration-form">
         <div class="form-group">
           <label for="fname">First Name</label>
-          <input type="text" id="fname" name="first_name" required/>
+          <input type="text" id="fname" name="first_name" required />
         </div>
         <div class="form-group">
           <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="last_name" required/>
+          <input type="text" id="lname" name="last_name" required />
         </div>
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" required/>
+          <input type="email" id="email" name="email" required />
         </div>
         <div class="form-group">
           <label for="phone">Contact Number</label>
-          <input type="tel" id="phone" name="phone" placeholder="+1234567890" pattern="^\+?\d{10,15}$" required/>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+1234567890"
+            pattern="^\\+?\\d{10,15}$"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="school">High School</label>
-          <input type="text" id="school" name="school" required/>
+          <input type="text" id="school" name="school" required />
         </div>
         <div class="form-group">
           <label for="grade">Grade</label>
@@ -336,7 +371,10 @@
   <section id="contact">
     <div class="container">
       <h2 class="section-title">Contact Us</h2>
-      <p>Email: <a href="mailto:info@cortex.ai">info@cortex.ai</a> | Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+      <p>
+        Email: <a href="mailto:info@cortex.ai">info@cortex.ai</a> |
+        Phone: <a href="tel:+1234567890">+1 (234) 567-890</a>
+      </p>
     </div>
   </section>
 
@@ -348,21 +386,23 @@
   </footer>
 
   <script>
-    // mobile nav toggle
+    // Mobile nav toggle
     document.querySelector('.nav-toggle')
       .addEventListener('click', () => document.querySelector('nav').classList.toggle('open'));
 
-    // header darken on scroll
+    // Header background on scroll
     window.addEventListener('scroll', () => {
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20);
+      document.getElementById('header')
+        .classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    // form submit
+    // Form submission
     document.getElementById('registration-form')
       .addEventListener('submit', e => {
         e.preventDefault();
         fetch('https://script.google.com/macros/s/…/exec', {
-          method:'POST', body: new FormData(e.target)
+          method: 'POST',
+          body: new FormData(e.target)
         })
         .then(() => alert('Registration successful!'))
         .catch(() => alert('Error submitting form.'));
